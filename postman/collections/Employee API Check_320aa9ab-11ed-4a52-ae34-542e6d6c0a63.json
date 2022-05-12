@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "0de2454b-3ec4-4286-bb82-5fc48cae89ff",
+		"name": "Employee API Check",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Employees Data Check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ffb08862-6f8f-4542-b2c7-8d9475e2faa6",
+						"exec": [
+							"pm.test(\"check response Time\", function(){\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "3f240d2f-2208-4332-90e4-5b6e462ce887",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Singal user data",
+			"id": "1cceb6be-3b49-43e4-aa4b-3bc488bdb7a7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create A new user",
+			"id": "0b85cda2-8ce8-4e72-a493-c35ca03e9645",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"success\",\r\n    \"data\": {\r\n        \"name\": \"nayem\",\r\n        \"salary\": \"10000\",\r\n        \"age\": \"26\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"id": "1337517c-0e08-41cc-9771-fbce4f6687cf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"success\",\r\n    \"data\": {\r\n        \"name\": \"nayem\",\r\n        \"salary\": \"10000 + 500 =10500 \",\r\n        \"age\": \"26 + 1 = 27\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"id": "0fcfd247-66ec-4a81-96d5-61e2ec825b93",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

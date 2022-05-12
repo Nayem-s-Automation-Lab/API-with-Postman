@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "db11a2fd-b236-44a8-9d96-245e42fbedb0",
+		"name": "New Demo API",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Check some velidation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d8ddaab-ef42-4804-a3dc-fbe5fd99a897",
+						"exec": [
+							"tests[\"velideting response code\"] = responseCode.code == 200;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var response = JSON.parse(responseBody);\r",
+							"tests[\"per_page\"] = response.per_page == 6;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "58414b24-8878-4075-88bc-55731ef4c0ac",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Singal user Body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aa3b0fcc-7d57-4900-b5c2-7867f6b23bad",
+						"exec": [
+							"\r",
+							"var response = JSON.parse(responseBody);\r",
+							"tests[\"first_name\"] = response.data.first_name == \"Janet\";\r",
+							"tests[\"last_name\"] = response.data.last_name == \"Weaver\";\r",
+							"\r",
+							"tests[\"avatar\"] = response.data.avatar\t\r",
+							" == \"https://reqres.in/img/faces/2-image.jpg\";\r",
+							"\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    responseJson=pm.response.json();\r",
+							"    pm.expect(responseJson.data.id).to.eql(2);\r",
+							"    pm.expect(responseJson.data.email).to.eql(\"janet.weaver@reqres.in\");\r",
+							"    pm.expect(responseJson.data.first_name).to.eql(\"Janet\");\r",
+							"    pm.expect(responseJson.data.last_name).to.eql(\"Weaver\");\r",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "ef5afd49-438c-493a-9832-70eec07c9213",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create A new User",
+			"id": "efb5d4a3-e631-47ca-9c93-9c8fafba83b6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"TEAM leader\",\r\n    \"department\": \"SQA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create valid Login Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a27aaa7c-e35f-4bdb-a587-8b6eba11da43",
+						"exec": [
+							"tests[\"velideting token check\"] = responseBody.has(\"token\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "6ffc4e7c-b1a6-4afe-81d1-43c3a5ee4870",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/login",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Invalid Login Request",
+			"id": "75f3e30f-05c0-4111-bc45-2768868d4f60",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"tarikul.ewu@gamil.com\",\r\n    \"password\": \"Nayem@1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/login",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Negative Login Request",
+			"id": "277be472-bd37-4b1b-9aec-a7de27f3a6b3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/login",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

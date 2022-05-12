@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "4df2cf90-bf3f-43e2-ba80-331f19a97ab6",
+		"name": "API Chaining",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ListUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "56ebaa8d-bce9-4e2c-b18f-205c37b1758e",
+						"exec": [
+							"jsonData=JSON.parse(responseBody);\r",
+							"value= jsonData.data[0].first_name;\r",
+							"pm.globals.set(\"username\", value);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "eb62ac58-4828-4cfa-9926-af21cdc08e11",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"id": "397b022e-61bc-4ff1-9830-f3e592abd358",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"name\": \"{{username}}\",\r\n    \"job\": \"zion resident\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a451d943-d0de-407a-9fa7-c236afd8c080",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "73291cea-c599-4cef-b117-a266e081d1f7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "7c532889-c3b8-4df1-8781-3900ea753afe",
+			"key": "username",
+			"value": "xyz"
+		}
+	]
+}
